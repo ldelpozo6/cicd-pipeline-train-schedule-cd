@@ -69,7 +69,15 @@ pipeline {
                                         sourceFiles: 'dist/trainSchedule.zip',
                                         removePrefix: 'dist/',
                                         remoteDirectory: '/tmp',
-                                        execCommand: 'sudo yum install -y unzip && sudo /usr/bin/systemctl stop train-schedule && sudo rm -rf /opt/train-schedule/* && sudo unzip /tmp/trainSchedule.zip -d /opt/train-schedule && sudo /usr/bin/systemctl start train-schedule'
+                                        execCommand: '''
+                                            sudo yum install -y unzip &&\
+                                            sudo rm -rf /opt/train-schedule &&\
+                                            sudo unzip /tmp/trainSchedule.zip -d /opt/train-schedule &&\
+                                            sudo cp -f /opt/train-schedule/systemd/system/train-schedule.service /lib/systemd/system/ &&\
+                                            sudo systemctl daemon-reload &&\
+                                            sudo systemctl enable train-schedule.service &&\
+                                            sudo systemctl restart train-schedule
+                                            '''
                                     )
                                 ]
                             )
