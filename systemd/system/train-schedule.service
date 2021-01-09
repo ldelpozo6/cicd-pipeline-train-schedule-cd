@@ -4,11 +4,11 @@ Documentation=train-schedule
 After=network.target
 
 [Service]
-Environment=NODE_PORT=3000
 Type=simple
 User=jenkins
 ExecStart=/opt/train-schedule/bin/www
 Restart=on-failure
+WorkingDirectory=/opt/train-schedule/
 
 [Install]
 WantedBy=multi-user.target
