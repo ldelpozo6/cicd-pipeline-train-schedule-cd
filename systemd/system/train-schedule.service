@@ -1,0 +1,14 @@
+[Unit]
+Description=train-schedule Web Site
+Documentation=train-schedule
+After=network.target
+
+[Service]
+Environment=NODE_PORT=3000
+Type=simple
+User=jenkins
+ExecStart=/opt/train-schedule/bin/www
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
