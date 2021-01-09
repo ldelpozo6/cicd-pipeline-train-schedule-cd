@@ -22,6 +22,7 @@ task zip(type: Zip) {
 		include "public/**"
 		include "routes/**"
 		include "views/**"
+		include "systemd/**"
 	}
 	destinationDir(file("dist"))
 	baseName "trainSchedule"
